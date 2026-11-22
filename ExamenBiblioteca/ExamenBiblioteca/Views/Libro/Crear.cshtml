@@ -1,0 +1,38 @@
+﻿@model ExamenBiblioteca.Models.Libro
+
+<h2>Registrar Nuevo Libro</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form asp-action="Crear" method="post">
+    <div class="mb-3">
+        <label asp-for="NombreLibro" class="form-label">Nombre del Libro</label>
+        <input asp-for="NombreLibro" class="form-control" required />
+        <span asp-validation-for="NombreLibro" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Autor" class="form-label">Autor</label>
+        <input asp-for="Autor" class="form-control" required />
+        <span asp-validation-for="Autor" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="NombreEditorial" class="form-label">Editorial</label>
+        <input asp-for="NombreEditorial" class="form-control" required />
+        <span asp-validation-for="NombreEditorial" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ISBN" class="form-label">ISBN</label>
+        <input asp-for="ISBN" class="form-control" required />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

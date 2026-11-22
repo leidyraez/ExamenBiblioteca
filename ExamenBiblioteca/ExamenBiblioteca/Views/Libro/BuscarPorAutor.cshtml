@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ExamenBiblioteca.Models.Libro>
+
+<h2>Buscar Libros por Autor</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form asp-action="BuscarPorAutor" method="get" class="row g-3 mb-4">
+    <div class="col-md-6">
+        <input type="text" name="autor" value="@ViewBag.AutorBuscado" class="form-control" placeholder="Ingrese nombre o parte del autor..." />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre del Libro</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>ISBN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.NombreLibro</td>
+                    <td>@item.Autor</td>
+                    <td>@item.NombreEditorial</td>
+                    <td>@item.ISBN</td>
+                </tr>
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(ViewBag.AutorBuscado))
+        {
+            <tr>
+                <td colspan="5" class="text-center">No se encontraron libros para el autor "@ViewBag.AutorBuscado".</td>
+            </tr>
+        }
+    </tbody>
+</table>
